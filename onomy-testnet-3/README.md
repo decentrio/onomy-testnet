@@ -37,7 +37,8 @@ sed -i 's#"0.0.0.0:9091"#"0.0.0.0:'"${gRPC_WEB}"'"#g' config/app.toml
 
 Then you can start the node:
 ```bash
-onomyd start
+# skip checking invariants
+onomyd start --x-crisis-skip-assert-invariants
 ```
 
 To get faucet, you can go to channel (#faucet)[] on Discord to request. Each request will give you 100NOM every 24h
