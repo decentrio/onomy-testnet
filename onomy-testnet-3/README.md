@@ -1,6 +1,6 @@
 # onomy-testnet-3
 ## Overview
-This is new testnet `onomy-testbet-3` which includes the new modules and SDK50 for testing before implementing in the mainnet. This testnet also have mainnet state at version `v1.1.6-remove-onex`, to test the upgrade compability.
+This is new testnet `onomy-testnet-3` which includes the new modules and SDK50 for testing before implementing in the mainnet. This testnet also have mainnet state at version `v1.1.6-remove-onex`, to test the upgrade compability.
 
 ## Instructions
 As the chain is alrady running, validators don't need to submit gentx but use the faucet to get token to create validator later.
@@ -13,6 +13,7 @@ As the chain is alrady running, validators don't need to submit gentx but use th
 - Our peer: `9a4f3a2ed6248050148115da1871a813b0de4456@65.109.145.247:2000`
 
 You can run this script to automate the setup:
+- `install.sh` file:
 ```bash
 #!/bin/bash
 P2P=$1
@@ -34,6 +35,7 @@ sed -i 's/pruning = "default"/pruning = "everything"/g' config/app.toml
 sed -i 's#"0.0.0.0:9090"#"0.0.0.0:'"${gRPC}"'"#g' config/app.toml
 sed -i 's#"0.0.0.0:9091"#"0.0.0.0:'"${gRPC_WEB}"'"#g' config/app.toml
 ```
+-  Run command: `bash install.sh 2000 2001 2002 2003 <your-moniker>`
 
 Then you can start the node:
 ```bash
