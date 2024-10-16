@@ -68,7 +68,7 @@ To upgrade to `v2.0.0`, follow these commands:
 ```bash
 # stop onomy service
 wget -O $(which onomyd) https://github.com/onomyprotocol/onomy/releases/download/v2.0.0/onomyd
-chmod +x onomyd
+chmod +x $HOME/go/bin/onomyd
 ```
 
 ### v2.1.0
