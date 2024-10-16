@@ -1,6 +1,6 @@
 # onomy-testnet-3
 ## Overview
-This is new testnet `onomy-testbet-3` which includes the new modules and SDK50 for testing before implementing in the mainnet. This testnet also have mainnet state at version `v1.1.6-remove-onex`, to test the upgrade compability.
+This is new testnet `onomy-testbet-3` which includes the new modules and SDK50 for testing before implementing in the mainnet. This testnet also have mainnet state at version `v1.1.6-remove-onex`, to test the upgrade compatibility.
 
 ## Instructions
 As the chain is alrady running, validators don't need to submit gentx but use the faucet to get token to create validator later.
