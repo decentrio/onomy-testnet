@@ -1,6 +1,6 @@
 # onomy-testnet-3
 ## Overview
-This is new testnet `onomy-testbet-3` which includes the new modules and SDK50 for testing before implementing in the mainnet. This testnet also have mainnet state at version `v1.1.6-remove-onex`, to test the upgrade compatibility.
+This is new testnet `onomy-testnet-3` which includes the new modules and SDK50 for testing before implementing in the mainnet. This testnet also have mainnet state at version `v1.1.6-remove-onex`, to test the upgrade compability.
 
 ## Instructions
 As the chain is alrady running, validators don't need to submit gentx but use the faucet to get token to create validator later.
@@ -13,6 +13,7 @@ As the chain is alrady running, validators don't need to submit gentx but use th
 - Our peer: `9a4f3a2ed6248050148115da1871a813b0de4456@65.109.145.247:2000`
 
 You can run this script to automate the setup:
+- `install.sh` file:
 ```bash
 #!/bin/bash
 P2P=$1
@@ -34,10 +35,12 @@ sed -i 's/pruning = "default"/pruning = "everything"/g' config/app.toml
 sed -i 's#"0.0.0.0:9090"#"0.0.0.0:'"${gRPC}"'"#g' config/app.toml
 sed -i 's#"0.0.0.0:9091"#"0.0.0.0:'"${gRPC_WEB}"'"#g' config/app.toml
 ```
+-  Run command: `bash install.sh 2000 2001 2002 2003 <your-moniker>`
 
 Then you can start the node:
 ```bash
-onomyd start
+# skip checking invariants
+onomyd start --x-crisis-skip-assert-invariants
 ```
 
 To get faucet, you can go to channel (#faucet)[] on Discord to request. Each request will give you 100NOM every 24h
@@ -48,4 +51,33 @@ $request <your-address>
 The you can create the validator:
 ```bash
 onomyd tx staking create-validator --amount 100000000000000000000anom --from <key> --pubkey $(onomyd tendermint show-validator) --commission-rate 0.05 --commission-max-rate 0.2 --commission-max-change-rate 0.01 --node https://onomy-testnet.rpc.decentrio.ventures:443 --min-self-delegation 10000000000000000000 --chain-id onomy-testnet-3
+```
+
+
+## Upgrades
+Here is the upgrade path of the chain
+
+| Version|Height|URL|
+|----|----|---|
+|v2.0.0|137100|https://github.com/onomyprotocol/onomy/releases/download/v2.0.0/onomyd|
+|v2.1.0-testnet-2|137555|https://github.com/DongLieu/onomy/releases/tag/v2.1.0-testnet-2|
+
+### v2.0.0
+
+To upgrade to `v2.0.0`, follow these commands:
+```bash
+# stop onomy service
+wget -O $(which onomyd) https://github.com/onomyprotocol/onomy/releases/download/v2.0.0/onomyd
+chmod +x onomyd
+```
+
+### v2.1.0
+
+To upgrade to `v2.1.0-testnet-2`, follow these commands:
+```bash
+# stop onomy service
+git clone https://github.com/DongLieu/onomy
+cd onomy && git checkout v2.1.0-testnet-2
+make build
+mv onomyd $(which onomyd)
 ```
