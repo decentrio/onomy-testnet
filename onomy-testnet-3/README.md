@@ -5,7 +5,7 @@ This is new testnet `onomy-testnet-3` which includes the new modules and SDK50 f
 ## Instructions
 As the chain is alrady running, validators don't need to submit gentx but use the faucet to get token to create validator later.
 
-- Version: `v1.1.6-remove-onex`
+- Curent version: `v2.1.0-testnet`
 - Genesis: https://raw.githubusercontent.com/decentrio/onomy-testnet/refs/heads/main/onomy-testnet-3/genesis.json
 - RPC: https://onomy-testnet.rpc.decentrio.ventures:443
 - API: https://onomy-testnet.api.decentrio.ventures:443
@@ -37,10 +37,12 @@ sed -i 's#"0.0.0.0:9091"#"0.0.0.0:'"${gRPC_WEB}"'"#g' config/app.toml
 ```
 -  Run command: `bash install.sh 2000 2001 2002 2003 <your-moniker>`
 
+Download the snapshot: https://decentrio.ventures/services/testnets/onomy, or you can sync the chain from block 1 with upgrade path below.
+
 Then you can start the node:
 ```bash
 # skip checking invariants
-onomyd start --x-crisis-skip-assert-invariants
+onomyd start
 ```
 
 To get faucet, you can go to channel (#faucet)[] on Discord to request. Each request will give you 100NOM every 24h
@@ -59,25 +61,14 @@ Here is the upgrade path of the chain
 
 | Version|Height|URL|
 |----|----|---|
-|v2.0.0|137100|https://github.com/onomyprotocol/onomy/releases/download/v2.0.0/onomyd|
-|v2.1.0-testnet-2|137555|https://github.com/DongLieu/onomy/releases/tag/v2.1.0-testnet-2|
+|v2.0.0|1|https://github.com/onomyprotocol/onomy/releases/download/v2.0.0/onomyd|
+|v2.1.0-testnet|110|https://github.com/onomyprotocol/onomy/releases/download/v2.1.0-testnet/onomy_2.1.0-testnet_Linux_amd64|
 
-### v2.0.0
+### v2.1.0-testnet
 
-To upgrade to `v2.0.0`, follow these commands:
+To upgrade to `v2.1.0-testnet`, follow these commands:
 ```bash
 # stop onomy service
-wget -O $(which onomyd) https://github.com/onomyprotocol/onomy/releases/download/v2.0.0/onomyd
+wget -O $(which onomyd) https://github.com/onomyprotocol/onomy/releases/download/v2.1.0-testnet/onomy_2.1.0-testnet_Linux_amd64
 chmod +x onomyd
-```
-
-### v2.1.0
-
-To upgrade to `v2.1.0-testnet-2`, follow these commands:
-```bash
-# stop onomy service
-git clone https://github.com/DongLieu/onomy
-cd onomy && git checkout v2.1.0-testnet-2
-make build
-mv onomyd $(which onomyd)
 ```
