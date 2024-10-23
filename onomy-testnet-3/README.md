@@ -1,11 +1,11 @@
 # onomy-testnet-3
 ## Overview
-This is new testnet `onomy-testnet-3` which includes the new modules and SDK50 for testing before implementing in the mainnet. This testnet also have mainnet state at version `v1.1.6-remove-onex`, to test the upgrade compability.
+This is new testnet `onomy-testnet-3` which includes the new modules and SDK50 for testing before implementing in the mainnet. This testnet also have mainnet state at version `v2.0.0`, to test the upgrade compability.
 
 ## Instructions
 As the chain is alrady running, validators don't need to submit gentx but use the faucet to get token to create validator later.
 
-- Curent version: `v2.1.0-testnet`
+- Curent version: `v2.1.0-testnet-5`
 - Genesis: https://raw.githubusercontent.com/decentrio/onomy-testnet/refs/heads/main/onomy-testnet-3/genesis.json
 - RPC: https://onomy-testnet.rpc.decentrio.ventures:443
 - API: https://onomy-testnet.api.decentrio.ventures:443
@@ -14,30 +14,33 @@ As the chain is alrady running, validators don't need to submit gentx but use th
 
 You can run this script to automate the setup:
 - `install.sh` file:
-```bash
-#!/bin/bash
-P2P=$1
-RPC=$2
-gRPC=$3
-gRPC_WEB=$4
-MONIKER=$5
+    ```bash
+    #!/bin/bash
+    P2P=$1
+    RPC=$2
+    gRPC=$3
+    gRPC_WEB=$4
+    MONIKER=$5
 
-cd $HOME/go/bin
-wget -O onomyd https://github.com/onomyprotocol/onomy/releases/download/v1.1.6-remove-onex/onomyd
-onomyd init $MONIKER
-cd .onomy
-wget -O config/genesis.json https://raw.githubusercontent.com/decentrio/onomy-testnet/refs/heads/main/onomy-testnet-3/genesis.json
-sed -i.bak -e "s/^persistent_peers *=.*/persistent_peers = \"9a4f3a2ed6248050148115da1871a813b0de4456@65.109.145.247:2000\"/" config/config.toml
-sed -i 's#"tcp://127.0.0.1:26657"#"tcp://0.0.0.0:'"${RPC}"'"#g' config/config.toml
-sed -i 's#"tcp://0.0.0.0:26656"#"tcp://0.0.0.0:'"${P2P}"'"#g' config/config.toml
-sed -i 's/indexer = "kv"/indexer = "null"/g' config/config.toml
-sed -i 's/pruning = "default"/pruning = "everything"/g' config/app.toml
-sed -i 's#"0.0.0.0:9090"#"0.0.0.0:'"${gRPC}"'"#g' config/app.toml
-sed -i 's#"0.0.0.0:9091"#"0.0.0.0:'"${gRPC_WEB}"'"#g' config/app.toml
-```
--  Run command: `bash install.sh 2000 2001 2002 2003 <your-moniker>`
+    cd $HOME/go/bin
+    wget -O onomyd https://github.com/onomyprotocol/onomy/releases/download/v2.0.0/onomyd
+    onomyd init $MONIKER
+    cd .onomy
+    wget -O config/genesis.json https://raw.githubusercontent.com/decentrio/onomy-testnet/refs/heads/main/onomy-testnet-3/genesis.json
+    sed -i.bak -e "s/^persistent_peers *=.*/persistent_peers = \"9a4f3a2ed6248050148115da1871a813b0de4456@65.109.145.247:2000\"/" config/config.toml
+    sed -i 's#"tcp://127.0.0.1:26657"#"tcp://0.0.0.0:'"${RPC}"'"#g' config/config.toml
+    sed -i 's#"tcp://0.0.0.0:26656"#"tcp://0.0.0.0:'"${P2P}"'"#g' config/config.toml
+    sed -i 's/indexer = "kv"/indexer = "null"/g' config/config.toml
+    sed -i 's/pruning = "default"/pruning = "everything"/g' config/app.toml
+    sed -i 's#"0.0.0.0:9090"#"0.0.0.0:'"${gRPC}"'"#g' config/app.toml
+    sed -i 's#"0.0.0.0:9091"#"0.0.0.0:'"${gRPC_WEB}"'"#g' config/app.toml
+    ```
+-  Run command: 
+    ```bash
+    bash install.sh 2000 2001 2002 2003 <your-moniker>
+    ```
 
-Download the snapshot: https://decentrio.ventures/services/testnets/onomy, or you can sync the chain from block 1 with upgrade path below.
+Download the snapshot: https://decentrio.ventures/services/testnets/onomy, or you can sync the chain from block 1 with upgrade path [below](#upgrades).
 
 Then you can start the node:
 ```bash
@@ -50,9 +53,25 @@ To get faucet, you can go to channel (#faucet)[] on Discord to request. Each req
 $request <your-address>
 ```
 
-The you can create the validator:
+Then you can create the validator. The chain runs at v2.0.0, which implements SDK v0.50 so the command will be a bit different. 
 ```bash
-onomyd tx staking create-validator --amount 100000000000000000000anom --from <key> --pubkey $(onomyd tendermint show-validator) --commission-rate 0.05 --commission-max-rate 0.2 --commission-max-change-rate 0.01 --node https://onomy-testnet.rpc.decentrio.ventures:443 --min-self-delegation 10000000000000000000 --chain-id onomy-testnet-3
+onomyd tx staking create-validator val.json --from <key> --node https://onomy-testnet.rpc.decentrio.ventures:443 --chain-id onomy-testnet-3
+```
+The `val.json` file contains validator detail, and should look like this (default 100 NOM):
+```json
+{
+    "pubkey": {"@type":"/cosmos.crypto.ed25519.PubKey","key":"oWg2ISpLF405Jcm2vXV+2v4fnjodh6aafuIdeoW+rUw="},
+    "amount": "100000000000000000000anom",
+    "moniker": "",
+    "identity": "",
+    "website": "",
+    "security": "",
+    "details": "",
+    "commission-rate": "0.05",
+    "commission-max-rate": "0.2",
+    "commission-max-change-rate": "0.01",
+    "min-self-delegation": "1"
+}
 ```
 
 
@@ -62,13 +81,33 @@ Here is the upgrade path of the chain
 | Version|Height|URL|
 |----|----|---|
 |v2.0.0|1|https://github.com/onomyprotocol/onomy/releases/download/v2.0.0/onomyd|
-|v2.1.0-testnet|110|https://github.com/onomyprotocol/onomy/releases/download/v2.1.0-testnet/onomy_2.1.0-testnet_Linux_amd64|
+|v2.0.1|60|https://github.com/DongLieu/onomy/releases/tag/v2.0.1|
+|v2.1.0-testnet-5|2280|https://github.com/DongLieu/onomy/releases/tag/v2.1.0-testnet-5|
 
-### v2.1.0-testnet
-
-To upgrade to `v2.1.0-testnet`, follow these commands:
+### v2.0.0
+To install to `v2.0.0`, follow these commands:
 ```bash
 # stop onomy service
-wget -O $(which onomyd) https://github.com/onomyprotocol/onomy/releases/download/v2.1.0-testnet/onomy_2.1.0-testnet_Linux_amd64
+wget -O $(which onomyd) https://github.com/onomyprotocol/onomy/releases/download/v2.0.0/onomyd
 chmod +x onomyd
+```
+
+### v2.0.1
+To upgrade to `v2.0.1`, follow these commands:
+```bash
+# stop onomy service
+git clone https://github.com/DongLieu/onomy
+cd onomy && git checkout v2.0.1
+make build
+mv onomyd $(which onomyd)
+```
+
+### v2.1.0-testnet-5
+To upgrade to `v2.1.0-testnet-5`, follow these commands:
+```bash
+# stop onomy service
+git clone https://github.com/DongLieu/onomy
+cd onomy && git checkout v2.1.0-testnet-5
+make build
+mv onomyd $(which onomyd)
 ```
