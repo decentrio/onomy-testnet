@@ -5,7 +5,7 @@ This is new testnet `onomy-testnet-3` which includes the new modules and SDK50 f
 ## Instructions
 As the chain is alrady running, validators don't need to submit gentx but use the faucet to get token to create validator later.
 
-- Curent version: `v2.1.0-testnet-5`
+- Curent version: `v2.1.1-testnet.2`
 - Genesis: https://raw.githubusercontent.com/decentrio/onomy-testnet/refs/heads/main/onomy-testnet-3/genesis.json
 - RPC: https://onomy-testnet.rpc.decentrio.ventures:443
 - API: https://onomy-testnet.api.decentrio.ventures:443
@@ -81,8 +81,8 @@ Here is the upgrade path of the chain
 | Version|Height|URL|
 |----|----|---|
 |v2.0.0|1|https://github.com/onomyprotocol/onomy/releases/download/v2.0.0/onomyd|
-|v2.0.1|60|https://github.com/DongLieu/onomy/releases/tag/v2.0.1|
-|v2.1.0-testnet-5|2280|https://github.com/DongLieu/onomy/releases/tag/v2.1.0-testnet-5|
+|v2.0.1|70|https://github.com/DongLieu/onomy/releases/tag/v2.0.1|
+|v2.1.1-testnet.2|156|https://github.com/DongLieu/onomy/releases/tag/v2.1.1-testnet.2|
 
 ### v2.0.0
 To install to `v2.0.0`, follow these commands:
@@ -102,12 +102,12 @@ make build
 mv onomyd $(which onomyd)
 ```
 
-### v2.1.0-testnet-5
-To upgrade to `v2.1.0-testnet-5`, follow these commands:
+### v2.1.1-testnet.2
+To upgrade to `v2.1.1-testnet.2`, follow these commands:
 ```bash
 # stop onomy service
 git clone https://github.com/DongLieu/onomy
-cd onomy && git checkout v2.1.0-testnet-5
+cd onomy && git checkout v2.1.1-testnet.2
 make build
 mv onomyd $(which onomyd)
 ```
