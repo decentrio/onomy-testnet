@@ -45,7 +45,15 @@ You can run this script to automate the setup:
     bash install.sh 2000 2001 2002 2003 <your-moniker>
     ```
 
-Download the snapshot: https://decentrio.ventures/services/testnets/onomy
+Download the snapshot:
+```bash
+cd $HOME/.onomy
+mv data/priv_validator_state.json .
+wget http://65.109.145.247:3003/onomy-testnet_126467.tar.gz
+tar -xvf onomy-testnet_126467.tar.gz
+mv priv_validator_state.json data
+rm onomy-testnet_126467.tar.gz
+```
 
 Then you can start the node:
 ```bash
