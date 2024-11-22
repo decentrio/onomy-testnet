@@ -96,7 +96,7 @@ Here is the upgrade path of the chain
 
 | Version|Height|URL|
 |----|----|---|
-|v2.2.0-testnet|1|https://github.com/onomyprotocol/onomy/releases/tag/v2.1.4-testnet|
+|v2.2.0-testnet|1|https://github.com/onomyprotocol/onomy/releases/tag/v2.2.0-testnet|
 
 ### v2.2.0-testnet
 To install `v2.2.0-testnet`, follow these commands:
