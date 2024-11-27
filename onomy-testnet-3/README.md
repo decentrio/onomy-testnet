@@ -10,7 +10,7 @@ As the chain is alrady running, validators don't need to submit gentx but use th
 - RPC: https://onomy-testnet.rpc.decentrio.ventures:443
 - API: https://onomy-testnet.api.decentrio.ventures:443
 - gRPC: https://onomy-testnet.grpc.decentrio.ventures:443:9090
-- Our peer: `9a4f3a2ed6248050148115da1871a813b0de4456@65.109.145.247:2000`
+- Our peer: `fea1747056ba4824c61f4bdc6b78174d2615aaea@65.109.145.247:2000`
 
 You can run this script to automate the setup:
 - `install.sh` file:
@@ -30,7 +30,7 @@ You can run this script to automate the setup:
     onomyd init $MONIKER
     cd .onomy
     wget -O config/genesis.json https://raw.githubusercontent.com/decentrio/onomy-testnet/refs/heads/main/onomy-testnet-3/genesis.json
-    sed -i.bak -e "s/^persistent_peers *=.*/persistent_peers = \"9a4f3a2ed6248050148115da1871a813b0de4456@65.109.145.247:2000\"/" config/config.toml
+    sed -i.bak -e "s/^persistent_peers *=.*/persistent_peers = \"fea1747056ba4824c61f4bdc6b78174d2615aaea@65.109.145.247:2000\"/" config/config.toml
     sed -i 's#"tcp://127.0.0.1:26657"#"tcp://0.0.0.0:'"${RPC}"'"#g' config/config.toml
     sed -i 's#"tcp://0.0.0.0:26656"#"tcp://0.0.0.0:'"${P2P}"'"#g' config/config.toml
     sed -i 's/indexer = "kv"/indexer = "null"/g' config/config.toml
