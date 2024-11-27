@@ -5,7 +5,7 @@ This is new testnet `onomy-testnet-3` which includes the new `reserve` module an
 ## Instructions
 As the chain is alrady running, validators don't need to submit gentx but use the faucet to get token to create validator later.
 
-- Curent version: `v2.2.0-testnet`
+- Curent version: `v2.2.1-testnet`
 - Genesis: https://raw.githubusercontent.com/decentrio/onomy-testnet/refs/heads/main/onomy-testnet-3/genesis.json
 - RPC: https://onomy-testnet.rpc.decentrio.ventures:443
 - API: https://onomy-testnet.api.decentrio.ventures:443
@@ -23,7 +23,7 @@ You can run this script to automate the setup:
     MONIKER=$5
 
     cd $HOME/go/bin
-    wget -O onomyd https://github.com/onomyprotocol/onomy/releases/download/v2.2.0-testnet/onomy_2.2.0-testnet_Linux_amd64
+    wget -O onomyd https://github.com/onomyprotocol/onomy/releases/download/v2.2.1-testnet/onomy_2.2.1-testnet_Linux_amd64
     chmod +x onomyd
     onomyd version # should show v2.2.0-testnet
 
@@ -60,7 +60,7 @@ onomyd start
 ```
 
 To get faucet, you can go to channel [#faucet](https://discord.com/channels/790706044741222407/1291272235918819390) on Discord to request. Each request will give you these tokens every 24h:
-- 100 NOM
+- 1,000,000 NOM
 - 100 ATOM
 - 100 DAI
 - 100 Axelar USDT
@@ -69,7 +69,7 @@ To get faucet, you can go to channel [#faucet](https://discord.com/channels/7907
 $request <your-address>
 ```
 
-Then, you can create the validator. The chain runs at `v2.2.0-testnet`, which implements SDK v0.50, so the command will be a bit different. 
+Then, you can create the validator. The chain runs at `v2.2.1-testnet`, which implements SDK v0.50, so the command will be a bit different. 
 ```bash
 onomyd tx staking create-validator val.json --from <key> --node https://onomy-testnet.rpc.decentrio.ventures:443 --chain-id onomy-testnet-3
 ```
@@ -96,13 +96,13 @@ Here is the upgrade path of the chain
 
 | Version|Height|URL|
 |----|----|---|
-|v2.2.0-testnet|1|https://github.com/onomyprotocol/onomy/releases/tag/v2.2.0-testnet|
+|v2.2.1-testnet|1|https://github.com/onomyprotocol/onomy/releases/tag/v2.2.0-testnet|
 
 ### v2.2.0-testnet
-To install `v2.2.0-testnet`, follow these commands:
+To install `v2.2.1-testnet`, follow these commands:
 ```bash
 # stop onomy service
 cd $HOME/go/bin
-wget -O onomyd https://github.com/onomyprotocol/onomy/releases/download/v2.2.0-testnet/onomy_2.2.0-testnet_Linux_amd64
+wget -O onomyd https://github.com/onomyprotocol/onomy/releases/download/v2.2.1-testnet/onomy_2.2.1-testnet_Linux_amd64
 chmod +x onomyd
 ```
