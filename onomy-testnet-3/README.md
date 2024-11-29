@@ -25,7 +25,7 @@ You can run this script to automate the setup:
     cd $HOME/go/bin
     wget -O onomyd https://github.com/onomyprotocol/onomy/releases/download/v2.2.1-testnet/onomy_2.2.1-testnet_Linux_amd64
     chmod +x onomyd
-    onomyd version # should show v2.2.0-testnet
+    onomyd version # should show v2.2.1-testnet
 
     onomyd init $MONIKER
     cd .onomy
@@ -98,7 +98,7 @@ Here is the upgrade path of the chain
 |----|----|---|
 |v2.2.1-testnet|1|https://github.com/onomyprotocol/onomy/releases/tag/v2.2.0-testnet|
 
-### v2.2.0-testnet
+### v2.2.1-testnet
 To install `v2.2.1-testnet`, follow these commands:
 ```bash
 # stop onomy service
