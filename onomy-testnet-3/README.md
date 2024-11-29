@@ -47,10 +47,10 @@ Download the snapshot:
 ```bash
 cd $HOME/.onomy
 mv data/priv_validator_state.json .
-wget http://65.109.145.247:3003/onomy-testnet_126467.tar.gz
-tar -xvf onomy-testnet_126467.tar.gz
+wget https://backend.decentrio.ventures/snapshots/onomy-testnet/onomy-testnet_270050.tar.lz4
+lz4 -d onomy-testnet_270050.tar.lz4 | tar xvf -
 mv priv_validator_state.json data
-rm onomy-testnet_126467.tar.gz
+rm onomy-testnet_270050.tar.lz4
 ```
 
 Then you can start the node:
